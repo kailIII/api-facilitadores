@@ -640,8 +640,7 @@ abstract class Model {
 				$attributes[$name] = $models;
 			}
 		}
-
-		return $attributes;
+		return json_encode($attributes);
 	}
 
 	/**

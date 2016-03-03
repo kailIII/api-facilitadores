@@ -18,19 +18,19 @@ class Api_Usuarios_Controller extends Base_Controller {
         }catch (Exception $e){
             return ' Ha ocurrido un error al obtener los datos.';
         }
-        
-        if(!$usuarios){
-            $result[0] = array("rut_habilitado" => "no");
-        }
 
         foreach ($usuarios as $key => $usuario) {
-            $result[$key] = $usuario->to_array();
-        }
-        if($usuarios){
-            $result[0] = array_merge($result[0],array("rut_habilitado" => "si"));
+            $result = $usuario->to_array();
         }
 
-        return $result;
+        if($usuarios){
+            $array_elementos = json_decode($result,true);
+            $array_elementos["rut_habilitado"] = "si";
+        }else{
+            $array_elementos["rut_habilitado"] = "no";
+        }
+
+        return $array_elementos;
     }
 }
 ?>
